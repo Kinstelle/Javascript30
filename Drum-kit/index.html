@@ -64,6 +64,24 @@
         <audio data-key="75" src="sounds/tom.wav"></audio>
         <audio data-key="76" src="sounds/tink.wav"></audio>
 
-        <script></script>
+        <script>
+            function removeHighlight() {
+                this.classList.remove('playing');
+            }
+
+            function playSound(e) {
+                const key = e.keyCode;
+                const audio = document.querySelector(`audio[data-key="${key}"]`);
+                const touch = document.querySelector(`.key[data-key="${key}"]`);
+
+                if (!audio || !touch) return;
+                audio.currentTime = 0; // to play the audio without waiting for an other audio to stop
+                audio.play();
+                touch.classList.add('playing');
+                touch.addEventListener('transitionend', removeHighlight);
+            }
+
+            document.addEventListener('keydown', playSound);
+        </script>
     </body>
 </html>
