@@ -22,6 +22,18 @@
 
       <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
-      <script></script>
+      <script>
+          const inputs = document.querySelectorAll('input');
+
+          function updateProperty() {
+              const name = this.name;
+              const updatedValue = this.value;
+              const suffix = this.dataset.sizing || ''; // dataset is an array of all the 'data-' prefixed attributes on a html tag
+
+              document.querySelector('html').style.setProperty(`--${name}`, updatedValue + suffix);
+          }
+
+          inputs.forEach(input => input.addEventListener('input', updateProperty));
+      </script>
     </body>
 </html>
