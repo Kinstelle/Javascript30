@@ -9,12 +9,32 @@
     <body>
         <div class="clock">
             <div class="clock-face">
-                <div class="hand hour-hand"></div>
-                <div class="hand min-hand"></div>
-                <div class="hand second-hand"></div>
+                <div class="hand hours-hand"></div>
+                <div class="hand minutes-hand"></div>
+                <div class="hand seconds-hand"></div>
             </div>
         </div>
 
-        <script></script>
+        <script>
+            const secondsHand = document.querySelector('.seconds-hand');
+            const minutesHand = document.querySelector('.minutes-hand');
+            const hoursHand = document.querySelector('.hours-hand');
+
+            function setDate() {
+                const now = new Date();
+                const seconds = now.getSeconds();
+                const secondsDegrees = ((seconds / 60) * 360) + 90; // as the clock rotates on 360° and we add 90° on the default hands
+                const minutes = now.getMinutes();
+                const minutesDegrees = ((minutes / 60) * 360) + 90; // as the clock rotates on 360° and we add 90° on the default hands
+                const hours = now.getHours();
+                const hoursDegrees = ((hours / 12) * 360) + 90; // as the clock rotates on 360° and we add 90° on the default hands
+
+                secondsHand.style.transform = `rotate(${secondsDegrees}deg)`;
+                minutesHand.style.transform = `rotate(${minutesDegrees}deg)`;
+                hoursHand.style.transform = `rotate(${hoursDegrees}deg)`;
+            }
+
+            setInterval(setDate, 1000); // executes setDate() every second
+        </script>
     </body>
 </html>
